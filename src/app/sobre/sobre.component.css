@@ -1,0 +1,38 @@
+section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 35em;
+    margin-bottom: 10em;
+}
+
+section img{
+    width: 500px;
+    border-radius: 20px;
+}
+
+section h2{
+    font-family: "Play";
+    font-weight: 400;
+    color: #2C2C2C;
+    margin-bottom: 20px;
+    font-size: 50px;
+}
+
+section p{
+     font-family: "Roboto";
+     font-weight: normal;
+     color: #656565;
+     margin-bottom: 20px;
+}
+
+section button{
+    background-color: #014ABD;
+    color: white;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    padding: 15px 5px;
+}

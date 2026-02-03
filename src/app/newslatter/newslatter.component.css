@@ -1,0 +1,51 @@
+section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    background-color: #F0F6FF;
+    padding: 100px 20px;
+    border-radius: 20px;
+}
+
+section h4{
+    font-family: "Play";
+    font-weight: 400;
+    color: #2C2C2C;
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+section div p{
+     font-family: "Roboto";
+     font-weight: normal;
+     color: #656565;
+     margin-bottom: 10px;
+}
+
+section label{
+     font-family: "Roboto";
+     font-weight: 800;
+     font-size: 12px;
+     color: #272727;
+}
+
+section input, textarea{
+    padding: 10px;
+    width: 400px;
+    margin-bottom: 20px;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid #ddd;
+}
+
+button{
+    background-color: #014ABD;
+    color: white;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    padding: 15px 5px;
+}

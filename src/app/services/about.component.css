@@ -1,0 +1,75 @@
+section{
+    width: 100%;
+    background-color: white;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.191);
+    border-radius: 20px;
+    position: absolute;
+    bottom: 97%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 50px;
+}
+
+section ul{
+    text-align: center;
+     font-family: "Roboto";
+     cursor: pointer;
+     font-weight: 500;
+     margin-bottom: 30px;
+}
+
+
+section ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 20px;
+    text-align: center;
+}
+
+.invi{
+    display: none;
+}
+
+.invi p{
+     font-family: "Roboto";
+     font-weight: normal;
+     color: #656565;
+     margin-bottom: 20px;
+}
+
+.invi h2{
+     font-family: "Play";
+     font-weight: bold;
+     color: #2C2C2C;
+     margin-bottom: 20px;
+     font-size: 50px;
+}
+
+.invi button{
+    background-color: #014ABD;
+    color: white;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    padding: 15px 5px;
+}
+
+.invi img{
+    border-radius: 20px;
+    width: 500px;
+}
+
+.activo.invi{
+    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+section ul li.active-tab {
+    color: #014ABD;
+    border-bottom: 3px solid #014ABD;
+}

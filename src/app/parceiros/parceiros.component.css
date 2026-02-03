@@ -1,0 +1,32 @@
+main{
+    margin: 10em 0px;
+}
+
+h2{
+    font-family: "Play";
+    font-weight: 400;
+    color: #2C2C2C;
+    margin-bottom: 20px;
+    font-size: 50px;
+}
+
+section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+section div p{
+     font-family: "Roboto";
+     font-weight: normal;
+     color: #656565;
+     margin-bottom: 10px;
+}
+
+section img{
+    object-fit: cover;
+    width: 120px;
+    margin: 0px 10px;
+}

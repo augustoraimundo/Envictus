@@ -1,0 +1,30 @@
+<section>
+
+  <!-- TABS -->
+  <ul>
+    <li
+      *ngFor="let tab of tabs; let i = index"
+      (click)="setTab(i)"
+      [class.active-tab]="activeTab === i"
+    >
+      {{ tab.title }}
+    </li>
+  </ul>
+
+  <!-- CONTEÚDO -->
+  <div
+    class="invi activo"
+    *ngIf="tabs[activeTab] as tab"
+  >
+    <div>
+      <p>{{ tab.description }}</p>
+      <h2>{{ tab.price }}</h2>
+      <button>Solicitar Serviço</button>
+    </div>
+
+    <div>
+      <img src="../../../../imagens/man.png" alt="man">
+    </div>
+  </div>
+
+</section>
