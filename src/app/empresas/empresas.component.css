@@ -25,6 +25,13 @@ main{
     padding: 10px;
 }
 
+.employer div p{
+    font-family: "Roboto";
+    font-weight: normal;
+    color: #656565;
+    margin-bottom: 10px;
+}
+
 .employer div img{
     width: 150px;
     margin: auto;

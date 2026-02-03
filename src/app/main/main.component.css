@@ -32,7 +32,7 @@
     font-weight: 300;
 }
 
-.solution button{
+.solution .solicitar{
     background-color: #014ABD;
     color: white;
     font-size: 16px;
@@ -41,4 +41,16 @@
     cursor: pointer;
     width: 200px;
     padding: 15px 5px;
+}
+
+.solution .whatsapp{
+   background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 200px;
+    padding: 15px 5px; 
+    margin-left: 20px;
 }
