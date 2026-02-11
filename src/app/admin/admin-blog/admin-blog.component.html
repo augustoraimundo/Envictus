@@ -1,0 +1,32 @@
+<div class="admin-blog-container">
+  <h2>Criar Novo Post</h2>
+
+<div class="admin-blog">
+  <h2>Criar novo post</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submitPost()">
+
+    <label for="title">Título:</label>
+    <input type="text" id="title" formControlName="title">
+
+    <label for="content">Conteúdo:</label>
+    <textarea id="content" formControlName="content"></textarea>
+
+    <label for="published">
+      <input type="checkbox" formControlName="published"> Publicado
+    </label>
+
+    <label for="image">Imagem:</label>
+    <input type="file" id="image" (change)="onFileSelected($event)">
+    <div *ngIf="previewUrl">
+      <p>Preview da imagem:</p>
+      <img [src]="previewUrl" alt="Preview" width="200">
+    </div>
+
+    <button type="submit" [disabled]="uploading">Criar Post</button>
+  </form>
+
+  <p *ngIf="successMessage">{{ successMessage }}</p>
+</div>
+
+</div>

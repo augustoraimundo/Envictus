@@ -1,0 +1,12 @@
+<main *ngIf="!postNotFound">
+  <div *ngIf="post" class="post">
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <small>{{ post.createdAt | date:'short' }}</small>
+  </div>
+</main>
+
+<div *ngIf="postNotFound">
+  <h2>Post não encontrado 😢</h2>
+  <p>Verifique se o slug está correto.</p>
+</div>

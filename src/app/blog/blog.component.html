@@ -1,0 +1,28 @@
+<main>
+   <section class="blog-container">
+  <article class="post-card" *ngFor="let post of posts">
+    <!-- IMAGEM -->
+    <img
+      *ngIf="post.imageUrl"
+      class="post-image"
+      [src]="post.imageUrl"
+      [alt]="post.title"
+    />
+    <!-- CONTEÚDO -->
+    <div class="post-content">
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.content }}</p>
+
+      <small>
+        {{ post.createdAt | date:'dd/MM/yyyy' }}
+      </small>
+
+      <a [routerLink]="['/blog', post.slug]" class="read-more">
+        Ler mais →
+      </a>
+    </div>
+  </article>
+</section>
+
+</main>
+

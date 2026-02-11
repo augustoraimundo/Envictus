@@ -1,0 +1,29 @@
+main{
+    max-width: 1200px;
+    margin: auto;
+}
+
+section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.post-card{
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 40px;
+    background-color: white;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.141);
+}
+
+.post-card img{
+    width: 200px;
+}
+
+.post-card p{
+    max-width: 200px;
+}
