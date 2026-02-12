@@ -8,6 +8,7 @@ section{
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
+    margin-top: 8em;
 }
 
 .post-card{
@@ -18,12 +19,54 @@ section{
     margin: 40px;
     background-color: white;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.141);
+    width: 300px;
+    height: 300px;
+    position: relative;
 }
 
 .post-card img{
     width: 200px;
+    object-fit: cover;
+    width: 300px;
+    height: 300px;
+}
+
+.post-content{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 5px;
+    backdrop-filter: blur(30px);
+    background-color: rgba(0, 0, 0, 0.681);
+    color: white;
+}
+
+.post-card h2{
+    font-family: 'Play';
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .post-card p{
-    max-width: 200px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    padding: 5px 0px 15px 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-card a{
+    position: absolute;
+    right: 12px;
+    text-decoration: none;
+    color: rgb(0, 98, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+small{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
 }

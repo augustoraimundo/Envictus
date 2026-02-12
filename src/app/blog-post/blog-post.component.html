@@ -1,12 +1,30 @@
-<main *ngIf="!postNotFound">
-  <div *ngIf="post" class="post">
+<main>
+    <section class="post-wrapper" *ngIf="!loading && post">
+
+  <!-- IMAGEM DO POST -->
+  <img
+    *ngIf="post.imageUrl"
+    class="post-hero"
+    [src]="post.imageUrl"
+    [alt]="post.title"
+  />
+
+  <div class="post-content">
     <h1>{{ post.title }}</h1>
-    <p>{{ post.content }}</p>
-    <small>{{ post.createdAt | date:'short' }}</small>
+
+    <small class="post-date">
+      {{ post.createdAt | date:'dd MMMM yyyy' }}
+    </small>
+
+    <div class="post-text">
+      {{ post.content }}
+    </div>
   </div>
+
+</section>
+
+<!-- LOADING -->
+<p *ngIf="loading">A carregar...</p>
+
 </main>
 
-<div *ngIf="postNotFound">
-  <h2>Post não encontrado 😢</h2>
-  <p>Verifique se o slug está correto.</p>
-</div>
