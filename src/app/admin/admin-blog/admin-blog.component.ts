@@ -1,31 +1,46 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Firestore, collection, addDoc, serverTimestamp } from '@angular/fire/firestore';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule
+} from '@angular/forms';
+import {
+  Firestore,
+  collection,
+  collectionData,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  serverTimestamp
+} from '@angular/fire/firestore';
 import { CloudinaryService } from '../../servicesCloud/cloudinary.service';
 
 @Component({
   selector: 'app-admin-blog',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './admin-blog.component.html',
   styleUrls: ['./admin-blog.component.css']
 })
-export class AdminBlogComponent {
-  form: FormGroup;
-  firestore = inject(Firestore);
+export class AdminBlogComponent implements OnInit {
+
+  private firestore = inject(Firestore);
+  private fb = inject(FormBuilder);
   private cloudinary = inject(CloudinaryService);
 
-  successMessage = '';
-  uploading = false;
-  imageUrl: string = '';
-  previewUrl: string | ArrayBuffer | null = null;
+  form: FormGroup;
+  posts: any[] = [];
 
-  constructor(private fb: FormBuilder) {
+  editingPostId: string | null = null;
+  uploading = false;
+
+  imageUrl = '';
+  previewUrl: string | null = null;
+
+  constructor() {
     this.form = this.fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
@@ -34,58 +49,86 @@ export class AdminBlogComponent {
     });
   }
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (!file) return;
+  ngOnInit() {
+    const ref = collection(this.firestore, 'posts');
+    collectionData(ref, { idField: 'id' }).subscribe(data => {
+      this.posts = data;
+    });
+  }
 
-    // Preview local
-    const reader = new FileReader();
-    reader.onload = () => this.previewUrl = reader.result;
-    reader.readAsDataURL(file);
+  // 📷 UPLOAD
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
 
     this.uploading = true;
 
+    // preview
+    const reader = new FileReader();
+    reader.onload = () => this.previewUrl = reader.result as string;
+    reader.readAsDataURL(file);
+
     this.cloudinary.uploadImage(file).subscribe({
-      next: (res: any) => {
-        console.log('Resposta Cloudinary:', res);
-        if (res && res.secure_url) {
-          this.imageUrl = res.secure_url;
-          this.form.patchValue({ imageUrl: this.imageUrl });
-        } else {
-          console.warn('Resposta Cloudinary inesperada:', res);
-        }
+      next: res => {
+        this.imageUrl = res.secure_url;
+        this.form.patchValue({ imageUrl: this.imageUrl });
         this.uploading = false;
       },
-      error: (err) => {
-        console.error('Erro ao enviar imagem:', err);
+      error: err => {
+        console.error('Erro upload:', err);
         this.uploading = false;
       }
     });
   }
 
-  async submitPost() {
-    if (this.form.invalid) return;
+  // 💾 SALVAR
+  async submit() {
+    if (this.form.invalid || this.uploading) return;
 
-    const post = {
+    const data = {
       ...this.form.value,
-      createdAt: serverTimestamp(),
       slug: this.generateSlug(this.form.value.title)
     };
 
-    try {
-      const postsRef = collection(this.firestore, 'posts');
-      await addDoc(postsRef, post);
-      this.successMessage = 'Post criado com sucesso!';
-      this.form.reset({ published: true });
-      this.previewUrl = null;
-      this.imageUrl = '';
-    } catch (err) {
-      console.error('Erro ao criar post:', err);
-      this.successMessage = 'Erro ao criar post.';
+    if (this.editingPostId) {
+      await updateDoc(
+        doc(this.firestore, 'posts', this.editingPostId),
+        data
+      );
+    } else {
+      await addDoc(collection(this.firestore, 'posts'), {
+        ...data,
+        createdAt: serverTimestamp()
+      });
     }
+
+    this.resetForm();
   }
 
-  generateSlug(title: string): string {
-    return title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+  editPost(post: any) {
+    this.editingPostId = post.id;
+    this.form.patchValue(post);
+    this.previewUrl = post.imageUrl || null;
+    this.imageUrl = post.imageUrl || '';
+  }
+
+  async deletePost(id: string) {
+    if (!confirm('Remover post?')) return;
+    await deleteDoc(doc(this.firestore, 'posts', id));
+  }
+
+  resetForm() {
+    this.form.reset({ published: true });
+    this.editingPostId = null;
+    this.previewUrl = null;
+    this.imageUrl = '';
+  }
+
+  generateSlug(title: string) {
+    return title
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-');
   }
 }

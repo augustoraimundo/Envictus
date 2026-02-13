@@ -12,7 +12,7 @@ section{
 }
 
 .post-card{
-     display: flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
@@ -22,13 +22,18 @@ section{
     width: 300px;
     height: 300px;
     position: relative;
+    overflow: hidden;
 }
 
 .post-card img{
-    width: 200px;
     object-fit: cover;
-    width: 300px;
+    width: 100%;
     height: 300px;
+    transition: transform 0.9s ease;
+}
+
+.post-card:hover img{
+    transform: scale(1.1);
 }
 
 .post-content{

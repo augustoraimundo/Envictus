@@ -4,8 +4,14 @@ main {
  
 }
 
+.post-content{
+  margin-left: 20px;
+}
+
 .post-wrapper{
   margin-top: 10em;
+  display: flex;
+  flex-wrap: wrap;
 }
 
  h1 {

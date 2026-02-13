@@ -1,32 +1,70 @@
-<div class="admin-blog-container">
-  <h2>Criar Novo Post</h2>
+<main>
+    <h2 class="frist">Admin – Blog</h2>
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
 
-<div class="admin-blog">
-  <h2>Criar novo post</h2>
+  <input
+    type="text"
+    placeholder="Título"
+    formControlName="title"
+  />
 
-  <form [formGroup]="form" (ngSubmit)="submitPost()">
+  <textarea
+    rows="6"
+    placeholder="Conteúdo"
+    formControlName="content"
+  ></textarea>
 
-    <label for="title">Título:</label>
-    <input type="text" id="title" formControlName="title">
+  <!-- UPLOAD DE IMAGEM -->
+  <input
+    type="file"
+    accept="image/*"
+    (change)="onFileSelected($event)"
+  />
 
-    <label for="content">Conteúdo:</label>
-    <textarea id="content" formControlName="content"></textarea>
+  <!-- PREVIEW -->
+  <img
+    *ngIf="previewUrl"
+    [src]="previewUrl"
+    class="preview"
+  />
 
-    <label for="published">
-      <input type="checkbox" formControlName="published"> Publicado
-    </label>
+  <label>
+    <input type="checkbox" formControlName="published" />
+    Publicado
+  </label>
 
-    <label for="image">Imagem:</label>
-    <input type="file" id="image" (change)="onFileSelected($event)">
-    <div *ngIf="previewUrl">
-      <p>Preview da imagem:</p>
-      <img [src]="previewUrl" alt="Preview" width="200">
+  <button class="creatPost" type="submit" [disabled]="uploading">
+    {{ editingPostId ? 'Atualizar Post' : 'Criar Post' }}
+  </button>
+
+  <button
+    type="button"
+    *ngIf="editingPostId"
+    (click)="resetForm()"
+  >
+    Cancelar
+  </button>
+
+</form>
+
+<hr />
+
+<!-- LISTA -->
+<h2>Lista dos posts criados</h2>
+<div class="posts">
+  <div class="post" *ngFor="let post of posts">
+
+    <img *ngIf="post.imageUrl" [src]="post.imageUrl" />
+
+    <h3>{{ post.title }}</h3>
+    <small>{{ post.published ? 'Publicado' : 'Rascunho' }}</small>
+
+    <div class="actions">
+      <button class="editar" (click)="editPost(post)">✏️ Editar</button>
+      <button class="danger" (click)="deletePost(post.id)">🗑️ Remover</button>
     </div>
 
-    <button type="submit" [disabled]="uploading">Criar Post</button>
-  </form>
-
-  <p *ngIf="successMessage">{{ successMessage }}</p>
-</div>
+  </div>
 
 </div>
+</main>

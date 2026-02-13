@@ -11,14 +11,13 @@
 
   <div class="post-content">
     <h1>{{ post.title }}</h1>
-
-    <small class="post-date">
-      {{ post.createdAt | date:'dd MMMM yyyy' }}
-    </small>
-
     <div class="post-text">
       {{ post.content }}
     </div>
+
+     <small class="post-date">
+      {{ post.createdAt | date:'dd MMMM yyyy' }}
+    </small>
   </div>
 
 </section>
